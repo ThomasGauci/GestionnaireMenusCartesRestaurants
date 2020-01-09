@@ -1,6 +1,9 @@
 <template>
 <div>
   <h1>Detail du restaurant d'id = {{id}}</h1>
+  <h1>Adresse du restaurant = </h1>
+  <h1>Description du quartier = </h1>
+  <h1>Evaluation des clients = </h1>
   </div>
 </template>
 
