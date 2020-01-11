@@ -104,12 +104,12 @@ export default {
 
       fetch(url, {method: "DELETE"})
         .then(reponseJSON => {
+          this.getDataFromServer();
           return reponseJSON.json();
         })
-        .then(console.log(index))
         .catch(console.error);
         //redemander la liste au serveur
-        this.getDataFromServer();
+        
     },
     ajouterRestaurant(event) {
       // eviter le comportement par defaut

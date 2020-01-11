@@ -5,6 +5,16 @@
   <h1>Description du quartier = </h1>
   <h1>Evaluation des clients = </h1>
 
+    <!--<md-table-toolbar>
+      <div class="md-toolbar-section-start">
+          <h1 class="md-title">Test</h1>
+      </div>
+
+      <md-field md-clearable class="md-toolbar-section-end">
+        <md-input placeholder="Essayons..." v-model="nomRecherche" @input="getDataFromServer()" />
+      </md-field>
+    </md-table-toolbar>-->
+
   </div>
 </template>
 
