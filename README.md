@@ -34,9 +34,10 @@ Professeur encadrant : [M. Michel BUFFA](https://github.com/micbuffa)
 *"TEAM"*
 
 - [Thomas GAUCI](https://github.com/ThomasGauci)
+- [Salome Marye](https://github.com/SalomeMarye)
 
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2019-present, GAUCI Thomas
+Copyright (c) 2019-present, Marye Salome - GAUCI Thomas
