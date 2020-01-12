@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import VueSimpleAlert from "vue-simple-alert";
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
@@ -12,6 +13,7 @@ import HelloWorld from "./components/HelloWorld.vue";
 Vue.use(VueMaterial)
 Vue.config.productionTip = false
 Vue.use(VueRouter)
+Vue.use(VueSimpleAlert);
 
 // config du router :
 const router = new VueRouter({

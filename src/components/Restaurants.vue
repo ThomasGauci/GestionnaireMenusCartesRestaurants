@@ -38,8 +38,8 @@
       </md-table-empty-state>
 
             <md-table-row slot="md-table-row" slot-scope="{ item }">
-                <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}</md-table-cell>
-                <md-table-cell md-label="Cuisine" md-sort-by="cuisine">{{ item.cuisine }}</md-table-cell>
+                <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}<md-button class="md-icon-button" v-on:click="changeName(item)"><md-icon>create</md-icon></md-button></md-table-cell>
+                <md-table-cell md-label="Cuisine" md-sort-by="cuisine">{{ item.cuisine }}<md-button class="md-icon-button" v-on:click="changeKitchen(item)"><md-icon>create</md-icon></md-button></md-table-cell>
                 <md-table-cell md-label="Details"><router-link :to="'restaurant/'+item._id">Details</router-link></md-table-cell>
                 <md-table-cell md-label="Supprimer"><md-button class="md-icon-button" v-on:click="supprimerRestaurant(item._id)"><md-icon>delete</md-icon></md-button></md-table-cell>
             </md-table-row>
@@ -134,6 +134,49 @@ export default {
       console.log("Page precedente");
       this.page--;
       this.getDataFromServer();
+    },
+    changeKitchen(item){
+
+      this.$prompt("Ecrivez la nouvelle cuisine du restaurant", item.cuisine)
+      .then(text => {
+        let url =
+        this.apiURL +
+        "/" + item._id;
+
+        var formData = new FormData();
+        formData.append('nom', item.name);
+        formData.append('cuisine', text);
+
+        fetch(url, {method: "PUT", body: formData})
+        .then(reponseJSON => {
+            this.$alert("Vous avez changé la cuisine du restaurant par : " + text, "Success", "success");
+            this.getDataFromServer();
+            return reponseJSON.json();
+        })
+        .catch(console.error);
+      });
+    },
+    changeName(item){
+      
+      this.$prompt("Ecrivez le nouveau nom du restaurant", item.name)
+      .then(text => {
+       
+        var formData = new FormData();
+        formData.append('nom', text);
+        formData.append('cuisine', item.cuisine);
+
+          let url =
+          this.apiURL +
+          "/" + item._id;
+
+        fetch(url, {method: "PUT", body: formData})
+        .then(reponseJSON => {
+          this.$alert("Vous avez changé le nom du restaurant par : " + text, "Success", "success");
+          this.getDataFromServer();
+          return reponseJSON.json();
+        })
+        .catch(console.error);
+      });
     }
   }
 };
