@@ -1,5 +1,8 @@
 <template>
 <div>
+  <div>
+  <p v-if="selectedImage"><img style="width:100%" :src="selectedImage" alt=""></p>
+</div>
   <md-table v-model="restaurants">
             <md-table-row slot="md-table-row" >
                 <md-table-cell md-label="Name" md-sort-by="name">Detail du restaurant d'id</md-table-cell>
@@ -66,7 +69,15 @@ export default {
       page:0,
       pagesize:10,
       nomrecherche:"",
-      image:"",
+      images: [
+      'https://image.noelshack.com/fichiers/2020/02/7/1578861665-terrasse.jpg',
+      'https://image.noelshack.com/fichiers/2020/02/7/1578861610-veranda.jpg',
+      'https://image.noelshack.com/fichiers/2020/02/7/1578861561-getlstd-property-photo.jpg',
+      'https://image.noelshack.com/fichiers/2020/02/7/1578861365-araz-restaurant-interior.jpg',
+      'https://image.noelshack.com/fichiers/2020/02/7/1578861305-a1a8429.jpg',
+      'https://image.noelshack.com/fichiers/2020/02/7/1578861265-restaurant-araz.jpg'
+    ],
+    selectedImage: null,
       nbPagesDeResultats:0,
       quartier:"",
       apiURL: "http://localhost:8080/api/restaurants/"
@@ -106,7 +117,12 @@ export default {
           this.quartier = reponseJS["restaurant"]["borough"]
         });
     },
-    
+    randomItem (items) {
+      return items[Math.floor(Math.random()*items.length)];
+    }
+  },
+  created() {
+    this.selectedImage = this.randomItem(this.images)
   }
 };
 </script>
