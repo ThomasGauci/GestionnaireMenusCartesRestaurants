@@ -17,8 +17,9 @@
     {{pagesize}}
   </p>
   <h1>Nombre de restaurants : {{nbRestaurants}}</h1>
-  <button v-on:click="pagePrecedente()" v-bind:disabled="page==0">Précédent</button>
-  <button v-on:click="pageSuivante()" :disabled="page == nbPagesDeResultats">Suivant</button>
+  <button v-on:click="ajouterRestaurant()"><md-icon>add</md-icon></button>
+  <button v-on:click="pagePrecedente()" v-bind:disabled="page==0"><md-icon>arrow_back_ios</md-icon></button>
+  <button v-on:click="pageSuivante()" :disabled="page == nbPagesDeResultats"><md-icon>arrow_forward_ios</md-icon></button>
  
   <H1>TABLE VUE-MATERIAL</H1>
         <md-table v-model="restaurants" md-sort="name" md-sort-order="asc" md-card md-fixed-header>
@@ -40,7 +41,7 @@
             <md-table-row slot="md-table-row" slot-scope="{ item }">
                 <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}<md-button class="md-icon-button" v-on:click="changeName(item)"><md-icon>create</md-icon></md-button></md-table-cell>
                 <md-table-cell md-label="Cuisine" md-sort-by="cuisine">{{ item.cuisine }}<md-button class="md-icon-button" v-on:click="changeKitchen(item)"><md-icon>create</md-icon></md-button></md-table-cell>
-                <md-table-cell md-label="Details"><router-link :to="'restaurant/'+item._id">Details</router-link></md-table-cell>
+                <md-table-cell md-label="Details"><router-link :to="'restaurant/'+item._id"><md-icon>loupe</md-icon></router-link></md-table-cell>
                 <md-table-cell md-label="Supprimer"><md-button class="md-icon-button" v-on:click="supprimerRestaurant(item._id)"><md-icon>delete</md-icon></md-button></md-table-cell>
             </md-table-row>
         </md-table>
@@ -111,16 +112,28 @@ export default {
         //redemander la liste au serveur
         
     },
-    ajouterRestaurant(event) {
-      // eviter le comportement par defaut
-      event.preventDefault();
+    ajouterRestaurant() {
 
-      this.restaurants.push({
-        nom: this.nom,
-        cuisine: this.cuisine
-      });
-      this.nom = "";
-      this.cuisine = "";
+      this.$prompt("Ecrivez le nom du nouveau restaurant")
+      .then(name_text => {   
+        this.$prompt("Ecrivez la cuisine du nouveau restaurant")
+        .then(cuisine_text => {
+
+          var formData = new FormData();
+
+          formData.append('nom', name_text);
+          formData.append('cuisine', cuisine_text);
+
+          fetch(this.apiURL, {method : "POST", body : formData})
+          .then(res => { 
+            this.$alert("Vous avez crée le restaurant " + name_text + " !", "Success", "success");
+            this.getDataFromServer();
+            return res.json();
+          })
+          .catch(err => {console.error(err)})
+        })
+      })
+
     },
     getColor(index) {
       return index % 2 ? "lightBlue" : "pink";
