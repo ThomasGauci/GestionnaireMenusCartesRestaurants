@@ -34,7 +34,7 @@ Professeur encadrant : [M. Michel BUFFA](https://github.com/micbuffa)
 *"TEAM"*
 
 - [Thomas GAUCI](https://github.com/ThomasGauci)
-- [Salome Marye](https://github.com/SalomeMarye)
+- [Salome MARYE](https://github.com/SalomeMarye)
 
 ## License
 
