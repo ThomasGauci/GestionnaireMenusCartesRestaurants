@@ -7,10 +7,6 @@ import 'vue-material/dist/theme/default.css'
 import VueRouter from 'vue-router'
 import Restaurants from "./components/Restaurants.vue";
 import RestaurantDetail from "./components/RestaurantDetail.vue";
-import RestaurantGPS from "./components/RestaurantGPS.vue";
-import RestaurantEvaluation from "./components/RestaurantEvaluation.vue";
-import RestaurantAdresse from "./components/RestaurantAdresse.vue";
-import RestaurantQuartier from "./components/RestaurantQuartier.vue";
 import HelloWorld from "./components/HelloWorld.vue";
 
 // configs...
@@ -36,16 +32,11 @@ const router = new VueRouter({
     { 
       path: '/restaurant/:id', 
       component: RestaurantDetail ,
-      props : true
     },
-    { 
-      path: '/restaurant/:adresse', 
-      component: RestaurantAdresse , RestaurantGPS , RestaurantEvaluation, RestaurantQuartier
-    },/*
     { 
       path: '*', 
       component: HelloWorld
-    },*/
+    },
   ],
   mode:'history'
 });
